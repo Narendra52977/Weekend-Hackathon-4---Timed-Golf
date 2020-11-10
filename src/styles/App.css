@@ -17,10 +17,11 @@
   width: 195px;
   margin: 15px;
   height: 60px;
-
 }
 
-
+.start {
+  background: blue;
+}
 .ball {
   background-color: black;
   box-shadow: 0 10px 10px -6px;
@@ -31,7 +32,6 @@
   width: 50px;
   border-radius: 25px;
 }
-
 
 .hole {
   background-color: rgb(62, 85, 107);
