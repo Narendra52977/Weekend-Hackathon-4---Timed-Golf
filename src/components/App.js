@@ -6,7 +6,6 @@ class Timer extends React.Component {
     this.state = {
       render: false,
       time: 0,
-      starttime: 0,
       x: 0,
       y: 0,
       ballPosition: { left: "0px", top: "0px" }
