@@ -94,23 +94,28 @@ class Timer extends React.Component {
   }
 
   renderChoice() {
-    if (this.state.render) {
-      return (
-        <>
-          <div className="hole"></div>
-          <div className="ball" style={this.state.ballPosition}></div>
-        </>
-      );
-    } else {
-      return <button onClick={this.buttonClick}>start</button>;
-    }
+    return (
+      <>
+        <div className="hole"></div>
+        <div className="ball" style={this.state.ballPosition}></div>
+        <button
+          style={{ position: "absolute", top: "150px", left: "150px" }}
+          onClick={this.buttonClick}
+        >
+          start
+        </button>
+      </>
+    );
   }
 
   render() {
     return (
       <>
         {this.renderChoice()}
-        <div style={{ position: "absolute", top: "500px", left: "700px" }}>
+        <div
+          className="heading-timer"
+          style={{ position: "absolute", top: "50px", left: "500px" }}
+        >
           {this.state.time}
         </div>
       </>
