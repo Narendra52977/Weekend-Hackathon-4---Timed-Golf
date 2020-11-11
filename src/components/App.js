@@ -25,6 +25,7 @@ class Timer extends React.Component {
     document.addEventListener("keydown", (event) => {
       if (this.state.render) {
         if (event.keyCode === 39) {
+          console.log("jeje");
           this.setState({
             x: this.state.x + 5
           });
