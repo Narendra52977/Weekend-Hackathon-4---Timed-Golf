@@ -11,9 +11,38 @@ class Timer extends React.Component {
     };
     this.intervalId = 0;
     this.buttonClick = this.buttonClick.bind(this);
+    this.handelkeyPress = this.handelkeyPress.bind(this);
   }
   buttonClick() {
     this.setState({ render: true });
+  }
+  handelkeyPress(event) {
+    if (this.state.render) {
+      if (event.keyCode === 39) {
+        console.log("jeje");
+        this.setState({
+          x: this.state.x + 5
+        });
+      }
+      if (event.keyCode === 40) {
+        this.setState({
+          y: this.state.y + 5
+        });
+      }
+      if (event.keyCode === 37) {
+        this.setState({
+          x: this.state.x - 5
+        });
+      }
+      if (event.keyCode === 38) {
+        this.setState({
+          y: this.state.y - 5
+        });
+      }
+    }
+    if (this.state.x === 250 && this.state.y === 250) {
+      this.setState({ render: false });
+    }
   }
   componentDidMount() {
     this.intervalId = setInterval(() => {
@@ -21,38 +50,14 @@ class Timer extends React.Component {
         this.setState({ time: this.state.time + 1 });
       }
     }, 1000);
-    document.addEventListener("keydown", (event) => {
-      if (this.state.render) {
-        if (event.keyCode === 39) {
-          console.log("jeje");
-          this.setState({
-            x: this.state.x + 5
-          });
-        }
-        if (event.keyCode === 40) {
-          this.setState({
-            y: this.state.y + 5
-          });
-        }
-        if (event.keyCode === 37) {
-          this.setState({
-            x: this.state.x - 5
-          });
-        }
-        if (event.keyCode === 38) {
-          this.setState({
-            y: this.state.y - 5
-          });
-        }
-      }
-      if (this.state.x === 250 && this.state.y === 250) {
-        this.setState({ render: false });
-      }
-    });
+    document.addEventListener("keydown", this.handelkeyPress);
   }
 
-  componentWillUnmount() {
+  componentWillUnMount() {
     clearInterval(this.intervalId);
+    document.removeEventListener("keydown", (event) => {
+      this.handelkeyPress;
+    });
   }
 
   render() {
