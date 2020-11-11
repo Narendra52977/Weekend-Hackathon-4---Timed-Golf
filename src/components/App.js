@@ -10,7 +10,6 @@ class Timer extends React.Component {
       y: 0
     };
     this.intervalId = 0;
-    this.renderChoice = this.renderChoice.bind(this);
     this.buttonClick = this.buttonClick.bind(this);
   }
   buttonClick() {
@@ -56,9 +55,10 @@ class Timer extends React.Component {
     clearInterval(this.intervalId);
   }
 
-  renderChoice() {
+  render() {
     return (
       <>
+        {" "}
         <div className="hole"></div>
         <div
           className="ball"
@@ -70,14 +70,6 @@ class Timer extends React.Component {
         >
           start
         </button>
-      </>
-    );
-  }
-
-  render() {
-    return (
-      <>
-        {this.renderChoice()}
         <div
           className="heading-timer"
           style={{ position: "absolute", top: "50px", left: "500px" }}
