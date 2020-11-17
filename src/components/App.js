@@ -15,11 +15,15 @@ class Timer extends React.Component {
   }
   buttonClick() {
     this.setState({ render: true });
+    this.intervalId = setInterval(() => {
+      if (this.state.render) {
+        this.setState({ time: this.state.time + 1 });
+      }
+    }, 1000);
   }
   handelkeyPress(event) {
     if (this.state.render) {
       if (event.keyCode === 39) {
-        console.log("jeje");
         this.setState({
           x: this.state.x + 5
         });
@@ -40,30 +44,24 @@ class Timer extends React.Component {
         });
       }
     }
-    if (this.state.x === 250 && this.state.y === 250) {
-      this.setState({ render: false });
-    }
   }
   componentDidMount() {
-    this.intervalId = setInterval(() => {
-      if (this.state.render) {
-        this.setState({ time: this.state.time + 1 });
-      }
-    }, 1000);
     document.addEventListener("keydown", this.handelkeyPress);
   }
-
+  componentDidUpdate() {
+    if (this.state.x === 250 && this.state.y === 250) {
+      document.removeEventListener("keydown", this.handelkeyPress);
+      clearInterval(this.intervalId);
+    }
+  }
   componentWillUnMount() {
+    document.removeEventListener("keydown", this.handelkeyPress);
     clearInterval(this.intervalId);
-    document.removeEventListener("keydown", (event) => {
-      this.handelkeyPress;
-    });
   }
 
   render() {
     return (
       <>
-        {" "}
         <div className="hole"></div>
         <div
           className="ball"
