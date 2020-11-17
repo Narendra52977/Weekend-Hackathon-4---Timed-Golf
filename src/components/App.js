@@ -4,7 +4,7 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      render: false,
+      isStarted: false,
       time: 0,
       x: 0,
       y: 0
@@ -14,15 +14,15 @@ class Timer extends React.Component {
     this.handelkeyPress = this.handelkeyPress.bind(this);
   }
   buttonClick() {
-    this.setState({ render: true });
+    this.setState({ isStarted: true });
     this.intervalId = setInterval(() => {
-      if (this.state.render) {
+      if (this.state.isStarted) {
         this.setState({ time: this.state.time + 1 });
       }
     }, 1000);
   }
   handelkeyPress(event) {
-    if (this.state.render) {
+    if (this.state.isStarted) {
       if (event.keyCode === 39) {
         this.setState({
           x: this.state.x + 5
@@ -46,7 +46,7 @@ class Timer extends React.Component {
     }
   }
   componentDidMount() {
-    document.addEventListener("keydown", this.handelkeyPress);
+    document.addEventListener("keydown", this.handelkeyPress, false);
   }
   componentDidUpdate() {
     if (this.state.x === 250 && this.state.y === 250) {
@@ -60,25 +60,16 @@ class Timer extends React.Component {
   }
 
   render() {
+    let ballPosition = { left: this.state.x + "px", top: this.state.y + "px" };
+
     return (
       <>
-        <div className="hole"></div>
-        <div
-          className="ball"
-          style={{ left: this.state.x + "px", top: this.state.y + "px" }}
-        ></div>
-        <button
-          style={{ position: "absolute", top: "150px", left: "150px" }}
-          onClick={this.buttonClick}
-        >
+        <div className="ball" style={ballPosition}></div>
+        <button className="start" onClick={this.buttonClick}>
           start
         </button>
-        <div
-          className="heading-timer"
-          style={{ position: "absolute", top: "50px", left: "500px" }}
-        >
-          {this.state.time}
-        </div>
+        <div className="hole"></div>
+        <div className="heading-timer">{this.state.time}</div>
       </>
     );
   }
