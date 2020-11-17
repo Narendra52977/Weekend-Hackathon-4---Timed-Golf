@@ -22,27 +22,29 @@ class Timer extends React.Component {
     }, 1000);
   }
   handelkeyPress(event) {
-    if (this.state.isStarted) {
-      if (event.keyCode === 39) {
-        this.setState({
-          x: this.state.x + 5
-        });
-      }
-      if (event.keyCode === 40) {
-        this.setState({
-          y: this.state.y + 5
-        });
-      }
-      if (event.keyCode === 37) {
-        this.setState({
-          x: this.state.x - 5
-        });
-      }
-      if (event.keyCode === 38) {
-        this.setState({
-          y: this.state.y - 5
-        });
-      }
+    let { x, y } = this.state;
+    if (!this.state.isStarted) {
+      return;
+    }
+    if (event.keyCode === 39) {
+      this.setState({
+        x: x + 5
+      });
+    }
+    if (event.keyCode === 40) {
+      this.setState({
+        y: y + 5
+      });
+    }
+    if (event.keyCode === 37) {
+      this.setState({
+        x: x - 5
+      });
+    }
+    if (event.keyCode === 38) {
+      this.setState({
+        y: y - 5
+      });
     }
   }
   componentDidMount() {
